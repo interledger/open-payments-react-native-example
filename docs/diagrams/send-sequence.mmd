@@ -1,0 +1,33 @@
+%% Send flow of the mobile PoC (Checkout tab). Rendered to
+%% interledger.org-v5 public/img/foundation-blog/2026-10-15/send-sequence.png
+%% with: npx @mermaid-js/mermaid-cli -i send-sequence.mmd -o send-sequence.png -c mermaid-config.json -s 2 -b white
+sequenceDiagram
+    autonumber
+    participant App as Mobile app<br/>(device key)
+    participant Recv as Receiver's wallet
+    participant Auth as Your auth server
+    participant UI as Your wallet UI<br/>(in-app WebView)
+    participant RS as Your wallet<br/>(resource server)
+
+    Note over App,RS: Every request from the app is signed with the device key (HTTP Message Signatures)
+
+    App->>Recv: grant [incoming-payment] + create incoming payment
+    App->>Auth: grant [quote]
+    App->>RS: create quote (debitAmount)
+    RS-->>App: quote with receiveAmount
+    App->>Auth: grant [outgoing-payment], limits = this quote, interact = redirect
+    Auth-->>App: interact.redirect + continue
+
+    App->>UI: open interact.redirect (already logged in)
+    Note over UI: user taps Accept
+    UI-->>App: redirect openpayments-rn-example://op/finish?interact_ref&hash<br/>WebView closes
+
+    Note over App: verify hash
+    App->>Auth: continue grant (interact_ref)
+    Auth-->>App: access token
+    App->>RS: create outgoing payment (quoteId)
+    RS->>Recv: money moves over Interledger
+
+    App->>Recv: grant [read, complete] + read incoming payment
+    Note over App,Recv: wait until receivedAmount ≥ quote receiveAmount
+    App->>Recv: POST {incomingPayment}/complete
