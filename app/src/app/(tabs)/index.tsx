@@ -22,7 +22,7 @@ export default function SendTab() {
           <Small>
             {account === undefined
               ? 'Loading…'
-              : 'Add this phone’s key to your wallet and confirm you own the address. It takes one login.'}
+              : 'Confirm you own your wallet address, then this phone adds its own key to it. It takes one login.'}
           </Small>
           <Button label="Go to Wallet" onPress={() => router.navigate('/wallet')} />
         </Card>
