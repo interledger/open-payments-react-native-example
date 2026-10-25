@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Open Payments React Native Example",
+    "slug": "open-payments-react-native-example",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "org.interledger.openpayments.rnexample"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "org.interledger.openpayments.rnexample"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-web-browser",
+      "expo-secure-store",
+      "./plugins/withSceneLifecycle",
+      "expo-router",
+      "expo-font"
+    ],
+    "scheme": "openpayments-rn-example"
+  }
+}
