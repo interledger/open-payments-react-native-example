@@ -1,0 +1,27 @@
+{
+  "name": "open-payments-react-native-example-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "gen-key": "tsx scripts/gen-key.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test test/*.test.ts"
+  },
+  "dependencies": {
+    "@interledger/http-signature-utils": "^2.0.3",
+    "@interledger/open-payments": "^7.4.0",
+    "better-sqlite3": "^13.0.3",
+    "express": "^5.1.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/express": "^5.0.3",
+    "@types/node": "^22",
+    "tsx": "^4.20.3",
+    "typescript": "^5"
+  }
+}
